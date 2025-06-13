@@ -1,13 +1,32 @@
+require("dotenv").config();
 const express = require("express");
-const app = express();
+const session = require("express-session");
+const path = require("path");
+const db = require("./config/db");
 const router = require("./routers");
-const { create } = require("express-handlebars");
 const port = 3000;
 const morgan = require("morgan");
-const path = require("path");
+
+const app = express();
+
+// Cấu hình session
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+const { create } = require("express-handlebars");
+
+db.connect();
+app.use(express.json());
 
 app.use(morgan("combined"));
 
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
 // Cấu hình Handlebars (phiên bản <6.0.0)
 const hbs = create({
   defaultLayout: "main",

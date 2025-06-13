@@ -1,9 +1,8 @@
-// const Admin = require("../models/products");
 
 class homeControllers {
 
     async dashboard(req, res) {
-        res.render('home');
+        res.render('index');
     }
 
 }
