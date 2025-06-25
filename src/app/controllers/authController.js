@@ -5,13 +5,13 @@ const { token } = require("morgan");
 class authController {
   //[GET] /auth/login
   login(req, res, next) {
-    res.render("login");
+    res.render("auth/login", { layout: "auth" });
   }
 
   //[GET] /auth/register
   register(req, res, next) {
     console.log(req.error);
-    res.render("register");
+    res.render("auth/register", { layout: "auth" });
   }
 
   // //[POST] /auth/login
@@ -21,8 +21,9 @@ class authController {
       const existingUser = await User.findOne({ email });
 
       if (!existingUser) {
-        return res.status(400).render("login", {
-          error: "Thông tin đăng nhập không chính xác",
+        return res.status(400).render("auth/login", {
+          layout: "auth",
+          error: "Tài khoản không tồn tại !",
           oldInput: req.body,
         });
       }
@@ -37,7 +38,7 @@ class authController {
         );
 
         req.session.existingUser = existingUser;
-
+        console.log(req.session);
         res.cookie("token", token, {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
@@ -52,10 +53,10 @@ class authController {
         //         token
         //     }
         // })
-
       } else {
-        return res.status(400).render("login", {
-          error: "Thông tin đăng nhập không chính xác",
+        return res.status(400).render("auth/login", {
+          layout: "auth",
+          error: "Thông tin đăng nhập không đúng !",
           oldInput: req.body,
         });
       }
@@ -64,51 +65,35 @@ class authController {
     }
   }
 
-  //[POST] /auth/logout
-  // async logoutHandle(req, res, next) {
-  //   try {
-  //     const user = req.session.existingUser;
-
-  //     if (user && req.session.cart && req.session.cart.length > 0) {
-  //       await CartItem.deleteMany({ userId: user._id }); // Xóa giỏ cũ nếu muốn
-
-  //       const itemsToSave = req.session.cart.map((item) => ({
-  //         userId: user._id,
-  //         productId: item._id,
-  //         name: item.name,
-  //         price: item.price,
-  //         quantity: item.quantity,
-  //         image: item.image,
-  //       }));
-
-  //       await CartItem.insertMany(itemsToSave);
-  //     }
-
-  //     res.clearCookie("connect.sid"); // Tên cookie mặc định cho express-session
-  //     req.session.destroy((err) => {
-  //       if (err) return next(err);
-  //       res.redirect("/auth/login");
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+  // [POST] /auth/logout
+  async logoutHandle(req, res, next) {
+    try {
+      res.clearCookie("connect.sid"); // Tên cookie mặc định cho express-session
+      req.session.destroy((err) => {
+        if (err) return next(err);
+        res.redirect("/auth/login");
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 
   //[POST] /auth/register
   async registerHandle(req, res, next) {
     try {
       let successMessage = "Đăng kí thành công";
       const { name, email, password } = req.body;
- 
+
       const existingUser = await User.findOne({
-        $or: [{ email }] ,
+        $or: [{ email }],
       });
 
       if (existingUser) {
         let errorMessage = "Tài khoản đã tồn tại với ";
         if (existingUser.email === email) errorMessage += "email này. ";
 
-        return res.status(400).render("register", {
+        return res.status(400).render("auth/register", {
+          layout: "auth",
           error: errorMessage,
           oldInput: req.body,
         });
@@ -120,7 +105,7 @@ class authController {
       });
       await user.save();
 
-      res.render("login", { success: successMessage });
+      res.render("auth/login", { layout: "auth", success: successMessage });
     } catch (err) {
       next(err);
     }

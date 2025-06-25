@@ -1,5 +1,5 @@
 
-class homeControllers {
+class homeController {
 
     async dashboard(req, res) {
         res.render('index');
@@ -7,4 +7,4 @@ class homeControllers {
 
 }
 
-module.exports = new homeControllers;
+module.exports = new homeController;
