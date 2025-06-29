@@ -109,7 +109,7 @@
                             <div class="ibox-content">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a class="btn btn-primary ">Thêm nhân sự</a>
+                                        <a class="btn btn-primary " href="/manager/personnel/form-add">Thêm nhân sự</a>
                                     </div>
                                     <div class="col-sm-6">
                                         <div id="editable_filter" class="dataTables_filter">
@@ -144,33 +144,26 @@
                                                 <td class="center">{{formatDate this.dob}}</td>
                                                 <td class="center">{{formatDate this.createdAt}}</td>
                                                 <td class="center">
-                                                    <button type="button" class="btn btn-danger btn-sm btn-delete"
-                                                        data-id="{{this._id}}" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteConfirmModal">
-                                                        Xóa
-                                                    </button>
-
                                                     <button data-toggle="modal" class="btn btn-primary  btn-delete"
                                                         data-id="{{this._id}}" href="#modal-form">Xoá</button>
-                                                    <div id="modal-form" class="modal fade" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-body">
-                                                                    <h3 class="m-t-none m-b">Bạn có chắc muốn xóa
-                                                                        {{this.name}} không ? </h3>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default"
-                                                                            data-dismiss="modal">Đóng</button>
-                                                                        <button type="button" class="btn btn-primary"
-                                                                            id="confirmDelete">Xóa</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </td>
                                             </tr>
                                             {{/each}}
+                                            <div id="modal-form" class="modal fade" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <h3 class="m-t-none m-b">Bạn có chắc muốn xóa không ? </h3>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Đóng</button>
+                                                                <button type="button" class="btn btn-primary"
+                                                                    id="confirmDelete">Xóa</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </tbody>
                                     </table>
                                 </div>
