@@ -4,6 +4,8 @@ class manageController {
     const person = await Person.find().sort({ createdAt: -1 }).lean();
     res.render("personnel", { person });
   }
+
+  //[DELETE] /manager//personnel/:id
   async removePersonnel(req, res) {
     //cần phải check tài khảo đang đăng nhặp , có thể xoá nhầm tài khoản đang đăng nhập
     Person.findById(req.params.id)
@@ -18,6 +20,12 @@ class manageController {
       })
       .then(() => res.redirect("back"));
   }
+
+  //[GET] /manager//personnel/add-form
+  addForm(req,res,next){
+    res.render('form_basic')
+  }
+
 }
 
 module.exports = new manageController();
