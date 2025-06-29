@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "68499cb100f5b203db6e5943"
+  },
+  "name": "Nguyễn Đình Minh",
+  "email": "creater@gmail.com",
+  "role": "user",
+  "password": "$2b$10$MD4Y49Bubk1uBoEtNH6yNu1ONSIWdhABq/NYu.YjH1F4JDhzga70W",
+  "createdAt": {
+    "$date": "2025-06-11T15:11:45.938Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-11T15:11:45.938Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68517a9ebe68f6555590b337"
+  },
+  "name": "Nguyễn Đình Minh Khánh",
+  "email": "admin@gmail.com",
+  "role": "admin",
+  "password": "$2b$10$gdKh11J5bdCHJ84FzY./n.Ow6xSX7jfPVbKQVPqCWWYJbMVNr.PLa",
+  "createdAt": {
+    "$date": "2025-06-17T14:24:30.732Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-17T14:24:30.732Z"
+  },
+  "__v": 0
+}]
