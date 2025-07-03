@@ -41,17 +41,17 @@
                                 <div class="row">
                                     <div class="col-sm-6 b-r">
                                         <h3 class="m-t-none m-b">Thông tin tài khoản </h3>
-                                        <form role="form">
+                                        <form role="form" action="/manager/personnel/add" method="POST">
                                             <div class="form-group"><label>Họ và tên</label> <input type="text"
-                                                    placeholder="Enter name" class="form-control"></div>
+                                                    placeholder="Enter name" name="name" class="form-control"></div>
                                             <div class="form-group"><label>Email</label> <input type="email"
-                                                    placeholder="Enter email" class="form-control"></div>
+                                                    placeholder="Enter email" name="email" class="form-control"></div>
                                             <div class="form-group"><label>Số điện thoại</label> <input type="phone"
-                                                    placeholder="Phone" class="form-control"></div>
+                                                    placeholder="Phone" name="phone" class="form-control"></div>
                                             <div class="form-group"><label>Ngày sinh</label> <input type="date"
-                                                    placeholder="birthday" class="form-control"></div>
+                                                    name="dob" class="form-control"></div>
                                             <div class="form-group"><label>Chức vụ</label>
-                                                <select id="role">
+                                                <select id="role" name="role">
                                                     <option value="admin"></option>
                                                     <option value="user">User</option>
                                                     <option value="SEO">SEO</option>
@@ -59,7 +59,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group"><label>Password</label> <input type="password"
-                                                    placeholder="Password" class="form-control"></div>
+                                                    placeholder="Password" name="password" class="form-control"></div>
                                             <div>
                                                 <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
                                                     type="submit"><strong>Thêm nhân sự</strong></button>
@@ -107,75 +107,62 @@
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
                                     </a>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        <i class="fa fa-wrench"></i>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-user">
-                                        <li><a href="#">Config option 1</a>
-                                        </li>
-                                        <li><a href="#">Config option 2</a>
-                                        </li>
-                                    </ul>
-                                    <a class="close-link">
-                                        <i class="fa fa-times"></i>
-                                    </a>
                                 </div>
                             </div>
                             <div class="ibox-content">
-                                <form class="form-horizontal">
-                                    <p>Sign in today for more expirience.</p>
-                                    <div class="form-group"><label class="col-lg-2 control-label">Email</label>
-
-                                        <div class="col-lg-10"><input type="email" placeholder="Email"
-                                                class="form-control"> <span class="help-block m-b-none">Example
-                                                block-level help text here.</span>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>STT</th>
+                                                        <th>Tên</th>
+                                                        <th>Chức vụ</th>
+                                                        <th>Điện thoại</th>
+                                                        <th>Email</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{#each person }}
+                                                    <tr class="gradeU">
+                                                        <td class="center">{{sum @index 1}}</td>
+                                                        <td>{{this.name}}</td>
+                                                        <td>{{this.role}}</td>
+                                                        <td>{{this.phone}}</td>
+                                                        <td>{{this.email}}</td>
+                                                    </tr>
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                    <div class="form-group"><label class="col-lg-2 control-label">Password</label>
-
-                                        <div class="col-lg-10"><input type="password" placeholder="Password"
-                                                class="form-control"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-offset-2 col-lg-10">
-                                            <div class="i-checks"><label> <input type="checkbox"><i></i> Remember me
-                                                </label></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-offset-2 col-lg-10">
-                                            <button class="btn btn-sm btn-white" type="submit">Sign in</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
+
+                        </div>
+
+                    </div>
+                    <div class="footer">
+                        {{!-- <div class="pull-right">
+                            10GB of <strong>250GB</strong> Free.
+                        </div> --}}
+                        <div>
+                            <strong>Copyright</strong> Company &copy; 2025
                         </div>
                     </div>
+
                 </div>
-
             </div>
+            <!-- iCheck -->
+            <script src="js/plugins/iCheck/icheck.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('.i-checks').iCheck({
+                        checkboxClass: 'icheckbox_square-green',
+                        radioClass: 'iradio_square-green',
+                    });
+                });
+            </script>
 
-        </div>
-        <div class="footer">
-            <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2015
-            </div>
-        </div>
-
-    </div>
-    </div>
-    <!-- iCheck -->
-    <script src="js/plugins/iCheck/icheck.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-    </script>
-    
 </body>
