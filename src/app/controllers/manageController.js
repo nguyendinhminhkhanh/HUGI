@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const Person = require("../models/User");
 class manageController {
   async personnel(req, res) {
@@ -22,10 +23,35 @@ class manageController {
   }
 
   //[GET] /manager//personnel/add-form
-  addForm(req,res,next){
-    res.render('form_basic')
+  async addForm(req, res, next) {
+    const person = await Person.find().sort({ createdAt: -1 }).lean();
+    res.render("form_basic", { person });
   }
 
+  //[POST /manager/personnel/add
+  async addPersonnel(req, res) {
+    const { name, email, phone, address, role, password } = req.body;
+    const checkUser = await Person.findOne({
+      $or: [{ email }, { phone }],
+    });
+    if (checkUser) {
+      let errorMessage = "Tài khoản đã tồn tại với ";
+      if (checkUser.email === email) errorMessage += "email này. ";
+      if (checkUser.phone === phone) errorMessage += "số điện thoại này.";
+
+      console.log(errorMessage);
+      return res.redirect("/manager/personnel/add-form");
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const person = new Person({
+      ...req.body,
+      password: hashedPassword,
+    });
+    await person
+      .save()
+      .then(() => res.redirect("/manager"))
+      .catch((err) => next(err));
+  }
 }
 
 module.exports = new manageController();
