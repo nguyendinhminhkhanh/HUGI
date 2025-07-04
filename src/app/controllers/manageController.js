@@ -25,7 +25,11 @@ class manageController {
   //[GET] /manager//personnel/add-form
   async addForm(req, res, next) {
     const person = await Person.find().sort({ createdAt: -1 }).lean();
-    res.render("form_basic", { person });
+    const countCEO = await Person.countDocuments({ role: "CEO" });
+    const CEO = {count : countCEO, color: "#0ABAB5" };
+
+    const totalRecords = await Person.estimatedDocumentCount();
+    res.render("form_basic", { person, CEO, totalRecords });
   }
 
   //[POST /manager/personnel/add
