@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const Person = require("../models/User");
+const { mutipleMongooseToObject, mongooseToObject } = require("../../util/mongose");
 class manageController {
   async personnel(req, res) {
     const person = await Person.find().sort({ createdAt: -1 }).lean();
@@ -26,7 +27,7 @@ class manageController {
   async addForm(req, res, next) {
     const person = await Person.find().sort({ createdAt: -1 }).lean();
     const countCEO = await Person.countDocuments({ role: "CEO" });
-    const CEO = {count : countCEO, color: "#0ABAB5" };
+    const CEO = { count: countCEO, color: "#0ABAB5" };
 
     const totalRecords = await Person.estimatedDocumentCount();
     res.render("form_basic", { person, CEO, totalRecords });
@@ -56,6 +57,33 @@ class manageController {
       .then(() => res.redirect("/manager"))
       .catch((err) => next(err));
   }
+
+  //[GET] /manager/personnel/edit/:id
+  async editPersonnel(req, res, next) {
+    const person = await Person.find().sort({ createdAt: -1 }).lean();
+    const personnelID = await Person.findById(req.params.id);
+    console.log(personnelID.name);
+    res.render("personnel_edit", { person, personnelID: mongooseToObject(personnelID) });
+  }
+
+  async updatePersonnel(req,res,next){
+    const id = req.params.id;
+    const data = req.body; 
+    console.log(id,data);
+    
+    Person.findById(id)
+      .then((person) => {
+        if (!person) {
+          return res.status(404).send("Perosnnel not found");
+        }
+        Person.updateOne({ _id: id }, data)
+            .then(() => res.redirect("/manager"))
+            .catch(next);
+      })
+      .catch(next);
+  }
+
 }
 
 module.exports = new manageController();
+ 
