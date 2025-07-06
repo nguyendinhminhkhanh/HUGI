@@ -144,8 +144,14 @@
                                                 <td class="center">{{formatDate this.dob}}</td>
                                                 <td class="center">{{formatDate this.createdAt}}</td>
                                                 <td class="center">
-                                                    <button data-toggle="modal" class="btn btn-primary  btn-delete"
-                                                        data-id="{{this._id}}" href="#modal-form">Xoá</button>
+                                                    <div class="btn">
+                                                        <button data-toggle="modal" class="btn btn-primary  btn-delete"
+                                                            data-id="{{this._id}}" href="#modal-form">Xoá</button>
+                                                    </div>
+                                                    <form method="GET" action="/manager/personnel/edit/{{this._id}}"
+                                                        class="btn">
+                                                        <button type="submit" class="btn btn-warning">Sửa</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                             {{/each}}
