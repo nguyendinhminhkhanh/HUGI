@@ -29,8 +29,10 @@
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h5>Sửa</h5>
+                            <div class="ibox-title" style="display: flex;justify-content: space-between">
+                                <form method="GET" action="/manager">
+                                    <button class="btn">Quay lại</button>
+                                </form>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
@@ -41,7 +43,8 @@
                                 <div class="row">
                                     <div class="col-sm-6 b-r" style="padding-bottom: 40px">
                                         <h3 class="m-t-none m-b">Thông tin tài khoản </h3>
-                                        <form role="form" action="/manager/personnel/update/{{personnelID._id}}" method="POST">
+                                        <form role="form" action="/manager/personnel/update/{{personnelID._id}}"
+                                            method="POST">
                                             <div class="form-group">
                                                 <label>Avatar: </label>
                                                 <img src="/image/image.jpg" width="50" height="50" alt="Mô tả ảnh">
@@ -91,7 +94,8 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="no-borders">
-                                                                <i class="fa fa-circle text-navy" style="color: {{CEO.color}}"></i>
+                                                                <i class="fa fa-circle text-navy"
+                                                                    style="color: {{CEO.color}}"></i>
                                                             </td>
                                                             <td class="no-borders">
                                                                 CEO
@@ -99,7 +103,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <i class="fa fa-circle text-navy" style="color: #56DFCF;"></i>
+                                                                <i class="fa fa-circle text-navy"
+                                                                    style="color: #56DFCF;"></i>
                                                             </td>
                                                             <td>
                                                                 Manager
@@ -107,7 +112,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <i class="fa fa-circle text-navy" style="color: #ADEED9;"></i>
+                                                                <i class="fa fa-circle text-navy"
+                                                                    style="color: #ADEED9;"></i>
                                                             </td>
                                                             <td>
                                                                 Admin
@@ -126,7 +132,8 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-body">
-                                    <h3 class="m-t-none m-b">Hãy chọn file ảnh (chưa xây dựng xong chức năng thay ảnh)</h3>
+                                    <h3 class="m-t-none m-b">Hãy chọn file ảnh (chưa xây dựng xong chức năng thay ảnh)
+                                    </h3>
                                     <!-- Thêm input chọn file -->
                                     <input type="file" id="avatarUpload" accept="image/*" class="form-control m-b">
                                     <div class="modal-footer">
