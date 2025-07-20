@@ -34,22 +34,9 @@
 <!-- ChartJS-->
 <script src="/js/plugins/chartJs/Chart.min.js"></script>
 
-<!-- Toastr -->
-<script src="/js/plugins/toastr/toastr.min.js"></script>
-
 
 <script>
     $(document).ready(function () {
-        setTimeout(function () {
-            toastr.options = {
-                closeButton: true,
-                progressBar: true,
-                showMethod: 'slideDown',
-                timeOut: 4000
-            };
-            toastr.success('Responsive Admin Theme', 'Chào mừng đến với HUGI');
-
-        }, 1300);
 
         // biểu đồ nhận giá trị từ managerControllers
         var sparklineCharts = function () {
