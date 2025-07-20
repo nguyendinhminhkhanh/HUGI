@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const http = require("http");
 const session = require("express-session");
 const path = require("path");
 const db = require("./config/db");
@@ -10,6 +11,7 @@ const methodOverride = require("method-override");
 const moment = require('moment');
 const port = 3000;
 const morgan = require("morgan");
+const websocketServer = require("./websocket/websocket");
 
 const { create } = require("express-handlebars");
 
@@ -23,6 +25,10 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+const server = http.createServer(app);
+// Khởi động websocket
+websocketServer(server);
 
 app.use((req, res, next) => {
   res.locals.existingUser = req.session.existingUser || null;
