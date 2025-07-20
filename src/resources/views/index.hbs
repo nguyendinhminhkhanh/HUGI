@@ -208,7 +208,7 @@
 
                                     <div class="feed-element">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/profile.jpg">
+                                            <img alt="image" class="img-circle" src="/image/logo.jpg">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right">5m ago</small>
@@ -220,7 +220,7 @@
 
                                     <div class="feed-element">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/a2.jpg">
+                                            <img alt="image" class="img-circle" src="/image/logo">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right">2h ago</small>
@@ -231,7 +231,7 @@
                                     </div>
                                     <div class="feed-element">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/a3.jpg">
+                                            <img alt="image" class="img-circle" src="/image/logo">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right">2h ago</small>
@@ -242,7 +242,7 @@
                                     </div>
                                     <div class="feed-element">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/a4.jpg">
+                                            <img alt="image" class="img-circle" src="/image/logo">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right text-navy">5h ago</small>
@@ -259,7 +259,7 @@
                                     </div>
                                     <div class="feed-element">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/a5.jpg">
+                                            <img alt="image" class="img-circle" src="/image/logo">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right">2h ago</small>
@@ -281,7 +281,7 @@
                                     </div>
                                     <div class="feed-element">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/profile.jpg">
+                                            <img alt="image" class="img-circle" src="/image/logo.jpg">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right">23h ago</small>
@@ -291,7 +291,7 @@
                                     </div>
                                     <div class="feed-element">
                                         <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/a7.jpg">
+                                            <img alt="image" class="img-circle" src="/image/logo">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right">46h ago</small>
@@ -462,3 +462,19 @@
         </div>
     </div>
 </div>
+<!-- Toastr -->
+<script src="/js/jquery-2.1.1.js"></script>
+<script src="/js/plugins/toastr/toastr.min.js"></script>
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 4000
+            };
+            toastr.success('Responsive Admin Theme', 'Chào mừng đến với HUGI');
+        }, 1300);
+    });
+</script>
