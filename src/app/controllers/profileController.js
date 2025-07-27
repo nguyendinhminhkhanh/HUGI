@@ -1,4 +1,9 @@
-class homeController {
+const User = require("../models/User");
+const fs = require("fs");
+const path = require("path");
+const { mongooseToObject } = require("../../util/mongose");
+const { mutipleMongooseToObject } = require("../../util/mongose");
+class profileController {
   async profile(req, res) {
     const userSession = req.session.existingUser;
     console.log(userSession);
@@ -7,13 +12,62 @@ class homeController {
     });
   }
 
-  async editImage(req, res) {
-    const userSession = req.session.existingUser;
-    console.log(userSession);
-    res.render("form_profile", {
-      existingUser: userSession,
-    });
+  async editAvatar(req, res, next) {
+    try {
+      if (!req.session.existingUser) {
+        return res.status(401).send("Chưa đăng nhập");
+      }
+
+      const existingUserId = req.session.existingUser._id;
+      const imageFile = req.files?.image;
+
+      if (!imageFile) {
+        return res.status(400).send("Chưa chọn ảnh để tải lên.");
+      }
+
+      const user = await User.findById(existingUserId);
+      if (!user) {
+        return res.status(404).send("Không tìm thấy người dùng.");
+      }
+
+      // Xóa ảnh cũ nếu có
+      if (user.avatar) {
+        const oldImagePath = path.join(__dirname, "../../public", user.avatar);
+        fs.unlink(oldImagePath, (err) => {
+          if (err) {
+            console.warn("Không xoá được ảnh cũ:", err.message);
+          } else {
+            console.log("Đã xoá ảnh cũ:", oldImagePath);
+          }
+        });
+      }
+
+      // Lưu ảnh mới
+      const uploadFileName = Date.now() + "_" + imageFile.name; // đổi tên để tránh trùng
+      const uploadPath = path.join(
+        __dirname,
+        "../../public/uploads",
+        uploadFileName
+      );
+
+      imageFile.mv(uploadPath, async (err) => {
+        if (err) {
+          console.error("Lỗi khi upload ảnh mới:", err);
+          return next(err);
+        }
+
+        // Cập nhật avatar mới vào DB
+        await User.updateOne(
+          { _id: existingUserId },
+          { avatar: "/uploads/" + uploadFileName }
+        );
+
+        return res.redirect("/profile");
+      });
+    } catch (error) {
+      return next(error);
+    }
   }
 }
 
-module.exports = new homeController();
+module.exports = new profileController();
