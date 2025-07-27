@@ -1,5 +1,22 @@
 [{
   "_id": {
+    "$oid": "68499cb100f5b203db6e5943"
+  },
+  "name": "Nguyễn Đình Minh",
+  "email": "creater@gmail.com",
+  "role": "user",
+  "password": "$2b$10$MD4Y49Bubk1uBoEtNH6yNu1ONSIWdhABq/NYu.YjH1F4JDhzga70W",
+  "createdAt": {
+    "$date": "2025-06-11T15:11:45.938Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-11T15:11:45.938Z"
+  },
+  "__v": 0,
+  "avatar": ""
+},
+{
+  "_id": {
     "$oid": "68517a9ebe68f6555590b337"
   },
   "name": "Nguyễn Đình Minh Khánh",
@@ -10,61 +27,47 @@
     "$date": "2025-06-17T14:24:30.732Z"
   },
   "updatedAt": {
-    "$date": "2025-06-17T14:24:30.732Z"
+    "$date": "2025-07-24T16:56:00.193Z"
+  },
+  "__v": 0,
+  "dob": "",
+  "phone": "",
+  "avatar": ""
+},
+{
+  "_id": {
+    "$oid": "6862aaae4f028c788aa7051e"
+  },
+  "name": "Nguyễn Đình Mạnh Tường",
+  "email": "manhtuong@gmail.com",
+  "phone": "0988770202",
+  "dob": "2011-11-11",
+  "role": "CEO",
+  "password": "$2b$10$hplqoGG77wWJdFZ73QA2j.Ct8te6CnY6Gh9ZyeyJ95AalXC5oehNS",
+  "createdAt": {
+    "$date": "2025-06-30T15:18:06.084Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-30T15:18:06.084Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "6860a755ea1acf596778267e"
+    "$oid": "688262d9135e824a086b4b03"
   },
-  "name": "Tài khoản1",
-  "email": "creater1@gmail.com",
+  "name": "test",
+  "email": "deadpool142368721@gmail.com",
   "phone": "0988770200",
   "dob": "1111-11-11",
   "role": "user",
-  "password": "$2b$10$/deo4ysti/vvyFAxIzxht.Qh1IaeRTNt4xnsfg8CRarKPLlymldV.",
+  "password": "$2b$10$.pJYXbFg1Ilt8.Y4obRAQe0w7kHM2mzY0uQztHut65MfPuOjjmMPS",
+  "avatar": "",
   "createdAt": {
-    "$date": "2025-06-29T02:39:17.404Z"
+    "$date": "2025-07-24T16:44:09.457Z"
   },
   "updatedAt": {
-    "$date": "2025-06-29T02:39:17.404Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6860a77bea1acf5967782681"
-  },
-  "name": "Tài khoản 2",
-  "email": "creater2@gmail.com",
-  "phone": "0395249212",
-  "dob": "2021-02-22",
-  "role": "user",
-  "password": "$2b$10$B86GDSN5mfTFiQaqsncTvO.PPoYxYQBhKd4RYUHaLHxole5eDf7c6",
-  "createdAt": {
-    "$date": "2025-06-29T02:39:55.655Z"
-  },
-  "updatedAt": {
-    "$date": "2025-06-29T02:39:55.655Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6860a79bea1acf5967782684"
-  },
-  "name": "Tài khoản 3",
-  "email": "creater3@gmail.com",
-  "phone": "0988770203",
-  "dob": "1990-12-12",
-  "role": "user",
-  "password": "$2b$10$PJa2w0f//o0ROyLUU4LM2.c5AiZmeg0GxQU7gNXYTyPq4GEBbfF6u",
-  "createdAt": {
-    "$date": "2025-06-29T02:40:28.000Z"
-  },
-  "updatedAt": {
-    "$date": "2025-06-29T02:40:28.000Z"
+    "$date": "2025-07-24T16:44:09.457Z"
   },
   "__v": 0
 }]
