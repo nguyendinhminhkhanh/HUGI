@@ -1,9 +1,13 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse">
+    <div class="sidebar-collapse ">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element"> <span>
-                        <img alt="image" class="img-circle" width="50px" height="50px" src="/image/Sample_User_Icon.png" />
+                    {{#if (eq existingUser.avatar "")}}
+                        <img alt="image" class="img-circle" width="50px" height="50px" src="/image/Sample_User_Icon.png" />            
+                    {{else}}
+                        <img alt="image" class="img-circle" width="50px" height="50px" src="{{existingUser.avatar}}" />
+                    {{/if}}
                     </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear"> <span class="block m-t-xs"> <strong

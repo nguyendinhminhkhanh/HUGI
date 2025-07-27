@@ -40,10 +40,12 @@
                                             method="POST">
                                             <div class="form-group">
                                                 <label>Avatar: </label>
-                                                <img src="/image/Sample_User_Icon.png" width="50" height="50"
-                                                    alt="Mô tả ảnh">
-                                                <button class="btn btn-info" data-toggle="modal" type="button"
-                                                    data-target="#change-image">Thay ảnh</button>
+                                                {{#if (eq existingUser.avatar "")}}
+                                                    <img src="/image/Sample_User_Icon.png" width="50" height="50" alt="Mô tả ảnh">
+                                                {{else}}
+                                                    <img src="{{existingUser.avatar}}" width="50" height="50" alt="Mô tả ảnh">
+                                                {{/if}}
+                                                    <button class="btn btn-info" data-toggle="modal" type="button" data-target="#change-image">Thay ảnh</button>
                                             </div>
                                             <div class="form-group"><label>Họ và tên</label> <input type="text"
                                                     name="name" class="form-control" value="{{existingUser.name}}">
@@ -56,14 +58,14 @@
                                             </div>
                                             <div class="form-group"><label>Ngày sinh</label> <input type="date"
                                                     name="dob" class="form-control" value="{{existingUser.dob}}"></div>
-                                            <div class="form-group"><label>Chức vụ</label>
+                                            {{!-- <div class="form-group"><label>Chức vụ</label>
                                                 <select id="role" name="role">
                                                     <option value="{{existingUser.role}}">{{existingUser.role}}</option>
                                                     <option value="user">User</option>
                                                     <option value="CEO">CEO</option>
                                                     <option value="manager">Manager</option>
                                                 </select>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group"><label>Password</label>
                                                 <div class="btn btn-danger">Đặt lại mật khẩu</div> {{!-- xây dựng chức
                                                 năng đặt lại mật khẩu --}}
