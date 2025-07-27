@@ -41,11 +41,14 @@
                                             <div class="form-group">
                                                 <label>Avatar: </label>
                                                 {{#if (eq existingUser.avatar "")}}
-                                                    <img src="/image/Sample_User_Icon.png" width="50" height="50" alt="Mô tả ảnh">
+                                                <img src="/image/Sample_User_Icon.png" width="50" height="50"
+                                                    alt="Mô tả ảnh">
                                                 {{else}}
-                                                    <img src="{{existingUser.avatar}}" width="50" height="50" alt="Mô tả ảnh">
+                                                <img src="{{existingUser.avatar}}" width="50" height="50"
+                                                    alt="Mô tả ảnh">
                                                 {{/if}}
-                                                    <button class="btn btn-info" data-toggle="modal" type="button" data-target="#change-image">Thay ảnh</button>
+                                                <button class="btn btn-info" data-toggle="modal" type="button"
+                                                    data-target="#change-image">Thay ảnh</button>
                                             </div>
                                             <div class="form-group"><label>Họ và tên</label> <input type="text"
                                                     name="name" class="form-control" value="{{existingUser.name}}">
@@ -123,22 +126,25 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div>(*) Mọi thay đổi sẽ được cập nhật ở lần đăng nhập tiếp theo</div>
                             </div>
                         </div>
                     </div>
                     <div id="change-image" class="modal fade" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-body">
-                                    <h3 class="m-t-none m-b">Hãy chọn file ảnh (chưa xây dựng xong chức năng thay ảnh)
+                                <form class="modal-body" method="POST" action="/profile/editAvatar"
+                                    enctype="multipart/form-data">
+                                    <h3 class="m-t-none m-b">Hãy chọn file ảnh
                                     </h3>
                                     <!-- Thêm input chọn file -->
-                                    <input type="file" id="avatarUpload" accept="image/*" class="form-control m-b">
+                                    <input type="file" id="avatarUpload" name="image" accept="image/*"
+                                        class="form-control m-b">
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn btn-primary" id="saveImage">Thay ảnh</button>
+                                        <button type="submit" class="btn btn-primary" id="saveImage">Thay ảnh</button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -148,6 +154,7 @@
                         </div> --}}
                         <div>
                             <strong>Copyright</strong> Company &copy; 2025
+                            tiếp theo
                         </div>
                     </div>
 
