@@ -66,6 +66,7 @@ class manageController {
     res.render("personnel_edit", { person, personnelID: mongooseToObject(personnelID) });
   }
 
+   //[POSST] /manager/personnel/update/:id
   async updatePersonnel(req,res,next){
     const id = req.params.id;
     const data = req.body; 
