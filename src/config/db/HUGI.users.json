@@ -27,12 +27,12 @@
     "$date": "2025-06-17T14:24:30.732Z"
   },
   "updatedAt": {
-    "$date": "2025-07-24T16:56:00.193Z"
+    "$date": "2025-07-27T09:30:26.637Z"
   },
   "__v": 0,
   "dob": "",
   "phone": "",
-  "avatar": ""
+  "avatar": "/uploads/1753604650027_KQG07225.jpg"
 },
 {
   "_id": {
@@ -48,9 +48,10 @@
     "$date": "2025-06-30T15:18:06.084Z"
   },
   "updatedAt": {
-    "$date": "2025-06-30T15:18:06.084Z"
+    "$date": "2025-07-27T08:55:33.612Z"
   },
-  "__v": 0
+  "__v": 0,
+  "avatar": "/uploads/1753606533612_cottages-in-the-middle-of-beach-753626.jpg"
 },
 {
   "_id": {
@@ -62,12 +63,69 @@
   "dob": "1111-11-11",
   "role": "user",
   "password": "$2b$10$.pJYXbFg1Ilt8.Y4obRAQe0w7kHM2mzY0uQztHut65MfPuOjjmMPS",
-  "avatar": "",
+  "avatar": "/uploads/1753604558454_building-with-tree-1534057.jpg",
   "createdAt": {
     "$date": "2025-07-24T16:44:09.457Z"
   },
   "updatedAt": {
-    "$date": "2025-07-24T16:44:09.457Z"
+    "$date": "2025-07-27T08:22:38.455Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6885fa2db22fe4853849e2fa"
+  },
+  "name": "Tài khoản",
+  "email": "nva@gmail.com",
+  "phone": "0988770203",
+  "dob": "0011-11-11",
+  "role": "manager",
+  "password": "$2b$10$q6s0fzuwOkFPOBDxzi57B.5wYWUQ8bE4gEuXwDs7tAt28w8PWtxhW",
+  "avatar": "",
+  "createdAt": {
+    "$date": "2025-07-27T10:06:37.670Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-27T10:07:23.987Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6885fa7cb22fe4853849e306"
+  },
+  "name": "Tài khoản 4",
+  "email": "quantrimang021@gmail.com",
+  "phone": "0395249212",
+  "dob": "2025-07-11",
+  "role": "user",
+  "password": "$2b$10$PQLUzPXwrVqhZGh5Oe4WYuTJkFJ7q9NPSdvVeLsbJccbEoHyPk22G",
+  "avatar": "/uploads/1753611154313_thumb-1920-1354103.png",
+  "createdAt": {
+    "$date": "2025-07-27T10:07:56.551Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-27T10:12:34.314Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6885faa0b22fe4853849e30f"
+  },
+  "name": "Tài khoản 5",
+  "email": "quantrimang0@gmail.com",
+  "phone": "09887702472",
+  "dob": "2025-07-11",
+  "role": "CEO",
+  "password": "$2b$10$RDgMQm.2UKjtghtyrdeHNODuxtxYzgZwetxmo6CWeCTZCi.4uotaG",
+  "avatar": "",
+  "createdAt": {
+    "$date": "2025-07-27T10:08:32.751Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-27T10:08:32.751Z"
   },
   "__v": 0
 }]
