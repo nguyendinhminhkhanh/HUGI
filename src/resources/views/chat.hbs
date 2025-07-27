@@ -1,0 +1,185 @@
+<style>
+    .container{
+        padding-top: 10px;
+    }
+    .chat-container {
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    .chat-header {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        background-color: #f8f8f8;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .chat-messages {
+        padding: 15px;
+        height: 400px;
+        overflow-y: auto;
+    }
+
+    .message {
+        margin-bottom: 15px;
+        padding: 10px 15px;
+        border-radius: 5px;
+        position: relative;
+    }
+
+    .message-sent {
+        background-color: #e3f2fd;
+        margin-left: 20%;
+        margin-right: 5px;
+    }
+
+    .message-received {
+        background-color: #f1f1f1;
+        margin-right: 20%;
+        margin-left: 5px;
+    }
+
+    .message-time {
+        font-size: 11px;
+        color: #999;
+        margin-top: 5px;
+        text-align: right;
+    }
+
+    .chat-input {
+        padding: 15px;
+        border-top: 1px solid #eee;
+        background-color: #f8f8f8;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .user-typing {
+        font-size: 12px;
+        color: #999;
+        font-style: italic;
+        height: 20px;
+        padding: 0 15px 10px;
+    }
+</style>
+
+<body>git status 
+    <div class="container">
+        <div class="chat-container">
+            <div class="chat-header">
+                <h4 class="text-center">Trò chuyện với <strong>Người dùng 2</strong></h4>
+            </div>
+
+            <div class="user-typing" id="typing-status"></div>
+
+            <div class="chat-messages" id="chat-messages">
+                <!-- Tin nhắn nhận -->
+                <div class="message message-received">
+                    <div class="message-text">Xin chào! Bạn có khỏe không?</div>
+                    <div class="message-time">10:00 AM - Người dùng 2</div>
+                </div>
+
+                <!-- Tin nhắn gửi -->
+                <div class="message message-sent">
+                    <div class="message-text">Mình khỏe, cảm ơn bạn! Còn bạn thì sao?</div>
+                    <div class="message-time">10:02 AM - Bạn</div>
+                </div>
+
+                <!-- Tin nhắn nhận -->
+                <div class="message message-received">
+                    <div class="message-text">Mình cũng khỏe. Bạn đang làm gì vậy?</div>
+                    <div class="message-time">10:03 AM - Người dùng 2</div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <form id="chat-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="message-input" placeholder="Nhập tin nhắn...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Gửi</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery và Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Xử lý gửi tin nhắn
+            $('#chat-form').submit(function (e) {
+                e.preventDefault();
+                var messageText = $('#message-input').val().trim();
+
+                if (messageText !== '') {
+                    // Thêm tin nhắn vào khung chat
+                    var currentTime = new Date();
+                    var hours = currentTime.getHours();
+                    var minutes = currentTime.getMinutes();
+                    var ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12; // Chuyển đổi 0 thành 12
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    var timeString = hours + ':' + minutes + ' ' + ampm;
+
+                    var newMessage = '<div class="message message-sent">' +
+                        '<div class="message-text">' + messageText + '</div>' +
+                        '<div class="message-time">' + timeString + ' - Bạn</div>' +
+                        '</div>';
+
+                    $('#chat-messages').append(newMessage);
+                    $('#message-input').val('');
+
+                    // Cuộn xuống tin nhắn mới nhất
+                    $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+
+                    // Giả lập phản hồi tự động
+                    setTimeout(function () {
+                        var replies = [
+                            "Mình hiểu rồi.",
+                            "Bạn nói đúng đấy!",
+                            "Thật thú vị!",
+                            "Bạn có thể giải thích thêm không?",
+                            "Cảm ơn bạn đã chia sẻ."
+                        ];
+                        var randomReply = replies[Math.floor(Math.random() * replies.length)];
+
+                        var replyTime = new Date();
+                        var replyHours = replyTime.getHours();
+                        var replyMinutes = replyTime.getMinutes();
+                        var replyAmpm = replyHours >= 12 ? 'PM' : 'AM';
+                        replyHours = replyHours % 12;
+                        replyHours = replyHours ? replyHours : 12;
+                        replyMinutes = replyMinutes < 10 ? '0' + replyMinutes : replyMinutes;
+                        var replyTimeString = replyHours + ':' + replyMinutes + ' ' + replyAmpm;
+
+                        var replyMessage = '<div class="message message-received">' +
+                            '<div class="message-text">' + randomReply + '</div>' +
+                            '<div class="message-time">' + replyTimeString + ' - Người dùng 2</div>' +
+                            '</div>';
+
+                        $('#chat-messages').append(replyMessage);
+                        $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+                    }, 1000 + Math.random() * 2000);
+                }
+            });
+
+            // Hiển thị trạng thái "đang nhập"
+            $('#message-input').on('input', function () {
+                if ($(this).val().trim() !== '') {
+                    $('#typing-status').text('Người dùng 2 đang nhập...');
+                    setTimeout(function () {
+                        $('#typing-status').text('');
+                    }, 2000);
+                } else {
+                    $('#typing-status').text('');
+                }
+            });
+        });
+    </script>
