@@ -12,7 +12,7 @@ const moment = require('moment');
 const port = 3000;
 const morgan = require("morgan");
 const websocketServer = require("./websocket/websocket");
-
+const fileUpload = require('express-fileupload');
 const { create } = require("express-handlebars");
 
 const app = express();
