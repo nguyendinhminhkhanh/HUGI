@@ -17,6 +17,11 @@ const { create } = require("express-handlebars");
 
 const app = express();
 
+app.use(fileUpload({//Dùng để upload file
+  useTempFiles: true,
+  tempFileDir: '/tmp/',
+}));
+
 // Cấu hình session
 app.use(
   session({
