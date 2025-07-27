@@ -35,7 +35,7 @@ class manageController {
 
   //[POST /manager/personnel/add
   async addPersonnel(req, res) {
-    const { name, email, phone, address, role, password } = req.body;
+    const { name, email, phone, address, role, password, avatar } = req.body;
     const checkUser = await Person.findOne({
       $or: [{ email }, { phone }],
     });
