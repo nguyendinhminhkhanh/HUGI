@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema(
     dob: { type: String, required: true },
     role: { type: String, required: true },
     password: { type: String, required: true },
+    avatar: { type: String},
   },
   { timestamps: true, collection: "users" }
 );
