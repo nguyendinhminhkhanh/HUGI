@@ -7,6 +7,9 @@ class mailboxController {
     async mail_compose(req, res) {
         res.render('mail_compose');
     }
+    async chat(req, res) {
+        res.render('chat');
+    }
 
 }
 
