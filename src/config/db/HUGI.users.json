@@ -19,7 +19,7 @@
   "_id": {
     "$oid": "68517a9ebe68f6555590b337"
   },
-  "name": "Nguyễn Đình Minh Khánh",
+  "name": "Nguyễn Đình Minh Bin",
   "email": "admin@gmail.com",
   "role": "admin",
   "password": "$2b$10$gdKh11J5bdCHJ84FzY./n.Ow6xSX7jfPVbKQVPqCWWYJbMVNr.PLa",
@@ -27,12 +27,12 @@
     "$date": "2025-06-17T14:24:30.732Z"
   },
   "updatedAt": {
-    "$date": "2025-07-27T09:30:26.637Z"
+    "$date": "2025-08-08T13:59:49.186Z"
   },
   "__v": 0,
   "dob": "",
-  "phone": "",
-  "avatar": "/uploads/1753604650027_KQG07225.jpg"
+  "phone": "0395249213",
+  "avatar": "/uploads/1754660506339_slide46.jpeg"
 },
 {
   "_id": {
