@@ -47,7 +47,13 @@
                                             method="POST">
                                             <div class="form-group">
                                                 <label>Avatar: </label>
-                                                <img src="/image/image.jpg" width="50" height="50" alt="Mô tả ảnh">
+                                                 {{#if (eq personnelID.avatar "")}}
+                                                <img src="/image/Sample_User_Icon.png" width="50" height="50"
+                                                    alt="Mô tả ảnh">
+                                                {{else}}
+                                                <img src="{{personnelID.avatar}}" width="50" height="50"
+                                                    alt="Mô tả ảnh">
+                                                {{/if}}
                                                 {{!-- <button class="btn btn-info" data-toggle="modal" type="button"
                                                     data-target="#change-image">Thay ảnh</button> --}}
                                             </div>
