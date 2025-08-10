@@ -49,6 +49,7 @@ class profileController {
         "../../public/uploads",
         uploadFileName
       );
+      const avatarPath = "/uploads/" + uploadFileName;
 
       imageFile.mv(uploadPath, async (err) => {
         if (err) {
@@ -57,11 +58,10 @@ class profileController {
         }
 
         // Cập nhật avatar mới vào DB
-        await User.updateOne(
-          { _id: existingUserId },
-          { avatar: "/uploads/" + uploadFileName }
-        );
+        await User.updateOne({ _id: existingUserId }, { avatar: avatarPath });
 
+        // Cập nhật vào session
+        req.session.existingUser.avatar = avatarPath;
         return res.redirect("/profile");
       });
     } catch (error) {
