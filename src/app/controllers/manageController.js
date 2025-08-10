@@ -1,6 +1,9 @@
 const bcrypt = require("bcrypt");
 const Person = require("../models/User");
-const { mutipleMongooseToObject, mongooseToObject } = require("../../util/mongose");
+const {
+  mutipleMongooseToObject,
+  mongooseToObject,
+} = require("../../util/mongose");
 class manageController {
   async personnel(req, res) {
     const person = await Person.find().sort({ createdAt: -1 }).lean();
@@ -63,28 +66,36 @@ class manageController {
     const person = await Person.find().sort({ createdAt: -1 }).lean();
     const personnelID = await Person.findById(req.params.id);
     console.log(personnelID.name);
-    res.render("personnel_edit", { person, personnelID: mongooseToObject(personnelID) });
+    res.render("personnel_edit", {
+      person,
+      personnelID: mongooseToObject(personnelID),
+    });
   }
 
-   //[POSST] /manager/personnel/update/:id
-  async updatePersonnel(req,res,next){
+  //[POSST] /manager/personnel/update/:id
+  async updatePersonnel(req, res, next) {
     const id = req.params.id;
-    const data = req.body; 
-    console.log(id,data);
-    
+    const data = req.body;
+    console.log(id, data);
+
+    //cách viết ngắn gọn của : req.session.existingUser.name = data.name;
+    Object.assign(req.session.existingUser, {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+    });
+
     Person.findById(id)
       .then((person) => {
         if (!person) {
           return res.status(404).send("Perosnnel not found");
         }
         Person.updateOne({ _id: id }, data)
-            .then(() => res.redirect("/manager"))
-            .catch(next);
+          .then(() => res.redirect("/manager"))
+          .catch(next);
       })
       .catch(next);
   }
-
 }
 
 module.exports = new manageController();
- 
