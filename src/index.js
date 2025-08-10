@@ -22,18 +22,29 @@ app.use(fileUpload({//Dùng để upload file
   tempFileDir: '/tmp/',
 }));
 
-// Cấu hình session
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+// // Cấu hình session
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
+
+
+// Khai báo session middleware
+const sessionMiddleware = session({
+  secret: "mysecret",
+  resave: false,
+  saveUninitialized: false,
+});
+
+app.use(sessionMiddleware);
+
 
 const server = http.createServer(app);
 // Khởi động websocket
-websocketServer(server);
+websocketServer(server,sessionMiddleware);
 
 app.use((req, res, next) => {
   res.locals.existingUser = req.session.existingUser || null;
@@ -80,6 +91,6 @@ app.set("views", path.join(__dirname, "resources", "views"));
 
 router(app);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+server.listen(port, () => {
+  console.log(`Server đang chạy tại http://localhost:${port}`);
 });
