@@ -1,7 +1,8 @@
 <style>
-    .container{
+    .container {
         padding-top: 10px;
     }
+
     .chat-container {
         max-width: 800px;
         margin: 0 auto;
@@ -66,7 +67,7 @@
     }
 </style>
 
-<body>git status 
+<body>
     <div class="container">
         <div class="chat-container">
             <div class="chat-header">
@@ -77,22 +78,16 @@
 
             <div class="chat-messages" id="chat-messages">
                 <!-- Tin nhắn nhận -->
-                <div class="message message-received">
+                {{!-- <div class="message message-received">
                     <div class="message-text">Xin chào! Bạn có khỏe không?</div>
                     <div class="message-time">10:00 AM - Người dùng 2</div>
-                </div>
+                </div> --}}
 
                 <!-- Tin nhắn gửi -->
-                <div class="message message-sent">
+                {{!-- <div class="message message-sent">
                     <div class="message-text">Mình khỏe, cảm ơn bạn! Còn bạn thì sao?</div>
                     <div class="message-time">10:02 AM - Bạn</div>
-                </div>
-
-                <!-- Tin nhắn nhận -->
-                <div class="message message-received">
-                    <div class="message-text">Mình cũng khỏe. Bạn đang làm gì vậy?</div>
-                    <div class="message-time">10:03 AM - Người dùng 2</div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="chat-input">
@@ -110,7 +105,13 @@
     <!-- jQuery và Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- websocket.io.js -->
+    {{!--
+    <script src="/socket.io/socket.io.js"></script> --}}
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script>
+        const socket = io();
         $(document).ready(function () {
             // Xử lý gửi tin nhắn
             $('#chat-form').submit(function (e) {
@@ -119,67 +120,27 @@
 
                 if (messageText !== '') {
                     // Thêm tin nhắn vào khung chat
-                    var currentTime = new Date();
-                    var hours = currentTime.getHours();
-                    var minutes = currentTime.getMinutes();
-                    var ampm = hours >= 12 ? 'PM' : 'AM';
-                    hours = hours % 12;
-                    hours = hours ? hours : 12; // Chuyển đổi 0 thành 12
-                    minutes = minutes < 10 ? '0' + minutes : minutes;
-                    var timeString = hours + ':' + minutes + ' ' + ampm;
-
-                    var newMessage = '<div class="message message-sent">' +
-                        '<div class="message-text">' + messageText + '</div>' +
-                        '<div class="message-time">' + timeString + ' - Bạn</div>' +
-                        '</div>';
-
-                    $('#chat-messages').append(newMessage);
+                    socket.emit("sendMessage", { username: "{{existingUser.name}}", message: messageText, })
                     $('#message-input').val('');
 
-                    // Cuộn xuống tin nhắn mới nhất
-                    $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
-
-                    // Giả lập phản hồi tự động
-                    setTimeout(function () {
-                        var replies = [
-                            "Mình hiểu rồi.",
-                            "Bạn nói đúng đấy!",
-                            "Thật thú vị!",
-                            "Bạn có thể giải thích thêm không?",
-                            "Cảm ơn bạn đã chia sẻ."
-                        ];
-                        var randomReply = replies[Math.floor(Math.random() * replies.length)];
-
-                        var replyTime = new Date();
-                        var replyHours = replyTime.getHours();
-                        var replyMinutes = replyTime.getMinutes();
-                        var replyAmpm = replyHours >= 12 ? 'PM' : 'AM';
-                        replyHours = replyHours % 12;
-                        replyHours = replyHours ? replyHours : 12;
-                        replyMinutes = replyMinutes < 10 ? '0' + replyMinutes : replyMinutes;
-                        var replyTimeString = replyHours + ':' + replyMinutes + ' ' + replyAmpm;
-
-                        var replyMessage = '<div class="message message-received">' +
-                            '<div class="message-text">' + randomReply + '</div>' +
-                            '<div class="message-time">' + replyTimeString + ' - Người dùng 2</div>' +
-                            '</div>';
-
-                        $('#chat-messages').append(replyMessage);
-                        $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
-                    }, 1000 + Math.random() * 2000);
-                }
-            });
-
-            // Hiển thị trạng thái "đang nhập"
-            $('#message-input').on('input', function () {
-                if ($(this).val().trim() !== '') {
-                    $('#typing-status').text('Người dùng 2 đang nhập...');
-                    setTimeout(function () {
-                        $('#typing-status').text('');
-                    }, 2000);
-                } else {
-                    $('#typing-status').text('');
                 }
             });
         });
+        socket.on("chatMessage", (data) => {
+            var newMessage = '';
+            if (data.username === "{{existingUser.name}}") {
+                newMessage = '<div class="message message-sent">' +
+                    '<div class="message-text">' + data.message + '</div>' +
+                    '<div class="message-time">10:03 AM - ' + data.username + '</div>' +
+                    '</div>';
+            } else {
+                newMessage = '<div class="message message-received">' +
+                    '<div class="message-text">' + data.message + '</div>' +
+                    '<div class="message-time">10:03 AM - ' + data.username + '</div>' +
+                    '</div>';
+            }
+            $('#chat-messages').append(newMessage);
+            console.log(data);
+            $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+        })
     </script>
