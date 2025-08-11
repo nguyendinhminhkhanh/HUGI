@@ -9,15 +9,36 @@ function websocketServer(server, sessionMiddleware) {
     },
   });
 
+  const usersOnline = {}; // username -> socket.id
+
   // Chuyển express-session middleware vào socket.io
   io.use((socket, next) => {
     sessionMiddleware(socket.request, {}, next);
   });
 
   io.on("connection", (socket) => {
-    // const session = socket.request.session;
-    console.log("1 người  đã kêt nối ", socket.id);
-    // console.log(session.existingUser.name);
+    socket.on("registerUser", (username) => {
+      socket.username = username; // gắn username vào socket
+      usersOnline[username] = socket.id;
+      console.log("✅", username, "đã online", socket.id);
+    });
+
+    socket.on("sendPrivateMessage", ({ to, message }) => {
+      const receiverSocketId = usersOnline[to];
+      if (receiverSocketId) {
+        // Gửi cho người nhận
+        io.to(receiverSocketId).emit("chatMessage", {
+          username: socket.username,
+          message,
+        });
+        // Gửi lại cho người gửi để hiển thị tin nhắn của mình
+        socket.emit("chatMessage", {
+          username: socket.username,
+          message,
+        });
+      }
+    });
+
     socket.on("sendMessage", (msg) => {
       console.log("👤 Người gửi:", msg.username);
       console.log("💬 Nội dung :", msg.message);
