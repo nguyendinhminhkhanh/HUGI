@@ -5,5 +5,6 @@ const router = express.Router();
 router.get("/", mailboxController.inbox);
 router.get("/mail_compose", mailboxController.mail_compose);
 router.get("/chat", mailboxController.chat);
+router.get("/contact", mailboxController.contact);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const socketIo = require("socket.io");
+const Person = require("../models/User");
 class mailboxController {
 
     async inbox(req, res) {
@@ -9,6 +10,10 @@ class mailboxController {
     }
     async chat(req, res) {
         res.render('chat');
+    }
+    async contact(req, res) {
+        const person = await Person.find().sort({ createdAt: -1 }).lean();
+        res.render('contact',{person});
     }
 
 }

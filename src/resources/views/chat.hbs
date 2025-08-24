@@ -126,10 +126,6 @@
                 }
             });
         });
-
-        // Đăng ký user khi vào phòng chat
-        socket.emit("registerUser", "{{existingUser.name}}");
-
         socket.on("chatMessage", (data) => {
             var newMessage = '';
             if (data.username === "{{existingUser.name}}") {
@@ -147,17 +143,4 @@
             console.log(data);
             $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
         })
-        
-        $('#chat-form').submit(function (e) {
-            e.preventDefault();
-            const messageText = $('#message-input').val().trim();
-            const receiver = "Người dùng 2"; // Hoặc lấy từ URL / dropdown
-            if (messageText) {
-                socket.emit("sendPrivateMessage", {
-                    to: receiver,
-                    message: messageText
-                });
-                $('#message-input').val('');
-            }
-        });
     </script>
