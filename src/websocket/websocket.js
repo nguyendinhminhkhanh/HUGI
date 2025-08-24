@@ -1,5 +1,5 @@
 const socketIo = require("socket.io");
-
+const Message = require("../app/models/Message");
 function websocketServer(server, sessionMiddleware) {
   const io = socketIo(server, {
     cors: {
@@ -14,10 +14,22 @@ function websocketServer(server, sessionMiddleware) {
       socket.username = username;
       console.log(username);
     });
-    socket.on("sendMessage", (msg) => {
-      console.log("👤 Người gửi:", msg.username);
-      console.log("💬 Nội dung :", msg.message);
-      io.emit("chatMessage", msg);
+    socket.on("sendMessage", (data) => {
+      const roomId = [data.from, data.to].sort().join("_");
+      console.log(roomId);
+      const message = new Message({
+        from: data.from,
+        to: data.to,
+        roomId,
+        content: data.content,
+      });
+      message.save();
+
+      console.log("👤 Người gửi:", data.username);
+      console.log("💬 Nội dung :", data.message);
+      io.emit("chatMessage", 
+        data
+      );
     });
     socket.on("disconnect", () => {
       console.log("1 người đã thoát ");

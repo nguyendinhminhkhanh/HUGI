@@ -4,6 +4,7 @@ const messageSchema = new mongoose.Schema(
   {
     from: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     to: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    roomId: { type: String, required: true },
     content: { type: String, required: true },
     read: { type: Boolean, default: false },
   },
