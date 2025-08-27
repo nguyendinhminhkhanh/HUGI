@@ -87,7 +87,7 @@
             </div>
 
             <div class="chat-input">
-                <form id="chat-form" action="/mailbox/messages/send" method="POST">
+                <form id="chat-form">
                     <input type="hidden" name="from" value="{{existingUser._id}}">
                     <input type="hidden" name="to" value="{{user._id}}">
                     <div class="input-group">
@@ -112,6 +112,20 @@
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 <script>
     const socket = io();
+
+    // Format date ở client side với cả giờ
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return ` ${hours}:${minutes}-${day}/${month}/${year}`;
+    };
+
+    // Join room
+    socket.emit("joinRoom", { userId1: "{{existingUser._id}}", userId2: "{{user._id}}" });
     $(document).ready(function () {
         // Xử lý gửi tin nhắn
         $('#chat-form').submit(function (e) {
@@ -121,7 +135,7 @@
             if (messageText !== '') {
                 // Thêm tin nhắn vào khung chat
                 socket.emit("sendMessage", {
-                    username: "{{existingUser.name}}",
+                    sender: "{{existingUser.name}}",
                     from: "{{existingUser._id}}",
                     to: "{{user._id}}",
                     content: messageText,
@@ -132,17 +146,38 @@
             }
         });
     });
+
+    // Nhận lịch sử từ server
+    socket.on("chatHistory", (messages) => {
+        var historyMessage = '';
+        messages.forEach(msg => {
+            if (msg.sender === "{{existingUser.name}}") {
+                historyMessage = '<div class="message message-sent">' +
+                    '<div class="message-text">' + msg.content + '</div>' +
+                    '<div class="message-time">' + formatDate(msg.createdAt) + ' - ' + msg.sender + '</div>' +
+                    '</div>';
+            } else {
+                historyMessage = '<div class="message message-received">' +
+                    '<div class="message-text">' + msg.content + '</div>' +
+                    '<div class="message-time">' + formatDate(msg.createdAt) + ' - ' + msg.sender + '</div>' +
+                    '</div>';
+            }
+            $('#chat-messages').append(historyMessage);
+        });
+    });
+
     socket.on("chatMessage", (data) => {
         var newMessage = '';
-        if (data.username === "{{existingUser.name}}") {
+        console.log('clien: ' + data.createdAt);
+        if (data.sender === "{{existingUser.name}}") {
             newMessage = '<div class="message message-sent">' +
-                '<div class="message-text">' + data.message + '</div>' +
-                '<div class="message-time">10:03 AM - ' + data.username + '</div>' +
+                '<div class="message-text">' + data.content + '</div>' +
+                '<div class="message-time">' + formatDate(data.createdAt) + ' - ' + data.sender + '</div>' +
                 '</div>';
         } else {
             newMessage = '<div class="message message-received">' +
-                '<div class="message-text">' + data.message + '</div>' +
-                '<div class="message-time">10:03 AM - ' + data.username + '</div>' +
+                '<div class="message-text">' + data.content + '</div>' +
+                '<div class="message-time">' + formatDate(data.createdAt) + ' - ' + data.sender + '</div>' +
                 '</div>';
         }
         $('#chat-messages').append(newMessage);

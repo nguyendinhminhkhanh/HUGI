@@ -8,5 +8,4 @@ router.get("/mail_compose", mailboxController.mail_compose);
 router.get("/chat", mailboxController.chat);
 router.get("/chat/:id", mailboxController.chat);
 router.get("/contact", mailboxController.contact);
-router.post("/messages/send", messageController.sendMessage);
 module.exports = router;
