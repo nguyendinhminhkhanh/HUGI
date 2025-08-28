@@ -8,19 +8,22 @@ const router = require("./routers");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
-const moment = require('moment');
+const moment = require("moment");
 const port = 3000;
 const morgan = require("morgan");
 const websocketServer = require("./websocket/websocket");
-const fileUpload = require('express-fileupload');
+const fileUpload = require("express-fileupload");
 const { create } = require("express-handlebars");
 
 const app = express();
 
-app.use(fileUpload({//Dùng để upload file
-  useTempFiles: true,
-  tempFileDir: '/tmp/',
-}));
+app.use(
+  fileUpload({
+    //Dùng để upload file
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 // // Cấu hình session
 // app.use(
@@ -31,7 +34,6 @@ app.use(fileUpload({//Dùng để upload file
 //   })
 // );
 
-
 // Khai báo session middleware
 const sessionMiddleware = session({
   secret: "mysecret",
@@ -41,10 +43,9 @@ const sessionMiddleware = session({
 
 app.use(sessionMiddleware);
 
-
 const server = http.createServer(app);
 // Khởi động websocket
-websocketServer(server,sessionMiddleware);
+websocketServer(server, sessionMiddleware);
 
 app.use((req, res, next) => {
   res.locals.existingUser = req.session.existingUser || null;
@@ -77,8 +78,18 @@ const hbs = create({
     eq: (a, b) => a === b,
     or: (a, b) => a || b,
     multiply: (a, b) => a * b,
-    formatDate: function (date) { //convert time
+    not:(value) => !value,
+    formatDate: function (date) {
+      //convert time
       return moment(date).format("DD/MM/YYYY");
+    },
+    // Phiên bản nâng cao với nhiều tùy chọn
+    formatDateTime: function(date, options) {
+      if (!date) return '';
+      
+      // Lấy format từ options.hash (nếu có)
+      const format = options.hash.format || "HH:mm - DD/MM/YYYY";
+      return moment(date).format(format);
     },
   },
 });

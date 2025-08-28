@@ -3,34 +3,35 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element"> <span>
-                        {{#if (eq existingUser.avatar "")}}
-                        <img alt="image" class="img-circle" width="50px" height="50px"
-                            src="/image/Sample_User_Icon.png" />
+                        {{#if (not existingUser)}}
+                        <img alt="image" width="100px" height="100px" src="/image/logo.jpg" />
                         {{else}}
                         <img alt="image" class="img-circle" width="50px" height="50px" src="{{existingUser.avatar}}" />
                         {{/if}}
                     </span>
+                    {{#if existingUser}}
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear"> <span class="block m-t-xs"> <strong
                                     class="font-bold">{{existingUser.name}}</strong>
                             </span>
                             {{#if (eq existingUser.role "admin")}}
-                                <span class="text-muted text-xs block">Quyền: Quản trị<b class="caret"></b></span>
+                            <span class="text-muted text-xs block">Quyền: Quản trị<b class="caret"></b></span>
                             {{else}}
-                                {{#if (eq existingUser.role "user")}}
-                                    <span class="text-muted text-xs block">Quyền: Người dùng<b class="caret"></b></span>
-                                {{else}}
-                                    <span class="text-muted text-xs block">Quyền: {{existingUser.role}} <b class="caret"></b></span>
-                                {{/if}}
+                            {{#if (eq existingUser.role "user")}}
+                            <span class="text-muted text-xs block">Quyền: Người dùng<b class="caret"></b></span>
+                            {{else}}
+                            <span class="text-muted text-xs block">Quyền: {{existingUser.role}} <b
+                                    class="caret"></b></span>
                             {{/if}}
-                        </span> </a>
+                            {{/if}}
+                        </span>
+                    </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="/profile">Hồ sơ</a></li>
                         <li><a href="/mailbox/contact">Kết Nối</a></li>
                         <li><a href="/mailbox">Hộp thư</a></li>
-                        {{!-- <li class="divider"></li> --}}
-                        {{!-- <li><a href="login.html">Logout</a></li> --}}
                     </ul>
+                    {{/if}}
                 </div>
                 <div class="logo-element">
                     HUGI
@@ -61,8 +62,13 @@
                 <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Hộp thư
                     </span><span class="label label-warning pull-right">16/24</span></a>
                 <ul class="nav nav-second-level collapse">
+                    {{#if existingUser}}
                     <li><a href="/mailbox">Nhắn tin</a></li>
                     <li><a href="/mailbox/contact">Danh bạ</a></li>
+                    {{else}}
+                    <li><a href="/auth/login-required">Nhắn tin</a></li>
+                    <li><a href="/auth/login-required">Danh bạ</a></li>
+                    {{/if}}
                 </ul>
             </li>
             <li>

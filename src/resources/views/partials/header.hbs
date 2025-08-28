@@ -114,11 +114,21 @@
             </li>
 
 
+            {{#if existingUser}}
             <li>
                 <form method="POST" action="/auth/logout">
-                    <button type="submit" class="btn btn-danger block full-width m-b"><i class="fa fa-sign-out"></i> Đăng xuất</button>
+                    <button type="submit" class="btn btn-danger block full-width m-b"><i class="fa fa-sign-out"></i>
+                        Đăng xuất</button>
                 </form>
             </li>
+            {{else}}
+            <li>
+                <form method="POST" action="/auth/logout">
+                    <button type="submit" class="btn btn-success block full-width m-b"><i class="fa fa-sign-out"></i>
+                        Đăng nhập</button>
+                </form>
+            </li>
+            {{/if}}
         </ul>
 
     </nav>

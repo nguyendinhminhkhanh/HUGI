@@ -4,6 +4,7 @@ const authController = require("../app/controllers/authController");
 const router = express.Router();
 router.get("/login", authController.login);
 router.post("/login", authController.loginHandle);
+router.get("/login-required", authController.login_required);
 
 router.post("/logout", authController.logoutHandle);
 

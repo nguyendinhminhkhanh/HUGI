@@ -110,6 +110,11 @@ class authController {
       next(err);
     }
   }
+
+  //[GET] /auth/login-required
+  async login_required(req, res, next) {
+    res.render('login-required');
+  }
 }
 
 module.exports = new authController();

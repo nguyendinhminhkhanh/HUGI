@@ -2,14 +2,58 @@ const socketIo = require("socket.io");
 const Person = require("../models/User");
 const Message = require("../models/Message");
 const User = require("../models/User");
-const { mongooseToObject } = require("../../util/mongose");
+const {
+  mongooseToObject,
+  mutipleMongooseToObject,
+} = require("../../util/mongose");
 class mailboxController {
+  //[GET]/mailbox
   async inbox(req, res) {
-    res.render("message");
+    try {
+      const userId = req.session.existingUser._id.toString();
+
+      // Lấy tất cả message mà user tham gia
+      const messages = await Message.find({
+        $or: [{ from: userId }, { to: userId }],
+      })
+        .sort({ createdAt: -1 })
+        .populate("from", "name email")
+        .populate("to", "name email");
+
+      // Gom nhóm theo roomId (lấy tin nhắn mới nhất cho mỗi room)
+      const map = new Map();
+      for (const msg of messages) {
+        if (!map.has(msg.roomId)) {
+          // clone để thêm trường mới
+          const msgObj = msg.toObject();
+          // xác định partner
+          if (msg.from._id.toString() === userId) {
+            msgObj.partner = msg.to.toObject(); // nếu mình là from => partner là to
+          } else {
+            msgObj.partner = msg.from.toObject(); // ngược lại
+          }
+          map.set(msg.roomId, msgObj);
+        }
+      }
+
+      const conversations = Array.from(map.values());
+      console.log(conversations);
+      console.log(userId);
+
+      res.render("message", {
+        conversations: mutipleMongooseToObject(conversations),
+        userId,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Lỗi server");
+    }
   }
+
   async mail_compose(req, res) {
     res.render("mail_compose");
   }
+
   async chat(req, res) {
     const id = req.params.id;
     try {
