@@ -9,6 +9,7 @@ router.post("/personnel/add", manageController.addPersonnel);
 
 router.get("/personnel/edit/:id", manageController.editPersonnel);
 router.post("/personnel/update/:id", manageController.updatePersonnel);
+router.get("/personnel/search", manageController.searchPersonnel);
 
 
 module.exports = router;

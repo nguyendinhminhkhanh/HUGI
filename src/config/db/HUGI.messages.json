@@ -1,0 +1,148 @@
+[{
+  "_id": {
+    "$oid": "68ab323cc22f2ecc6b87cbc8"
+  },
+  "from": {
+    "$oid": "68517a9ebe68f6555590b337"
+  },
+  "to": {
+    "$oid": "68499cb100f5b203db6e5943"
+  },
+  "roomId": "68499cb100f5b203db6e5943_68517a9ebe68f6555590b337",
+  "content": "ad",
+  "read": false,
+  "createdAt": {
+    "$date": "2025-08-24T15:39:40.759Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-24T15:39:40.759Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ab32b42cbaae6f7de7aa59"
+  },
+  "from": {
+    "$oid": "68517a9ebe68f6555590b337"
+  },
+  "to": {
+    "$oid": "6885fa7cb22fe4853849e306"
+  },
+  "roomId": "68517a9ebe68f6555590b337_6885fa7cb22fe4853849e306",
+  "content": "asmin",
+  "read": false,
+  "createdAt": {
+    "$date": "2025-08-24T15:41:40.559Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-24T15:41:40.559Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ab33012cbaae6f7de7aa5f"
+  },
+  "from": {
+    "$oid": "6885fa7cb22fe4853849e306"
+  },
+  "to": {
+    "$oid": "68517a9ebe68f6555590b337"
+  },
+  "roomId": "68517a9ebe68f6555590b337_6885fa7cb22fe4853849e306",
+  "content": "ad",
+  "read": false,
+  "createdAt": {
+    "$date": "2025-08-24T15:42:57.937Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-24T15:42:57.937Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ab33740f6a2563d2859076"
+  },
+  "from": {
+    "$oid": "68517a9ebe68f6555590b337"
+  },
+  "to": {
+    "$oid": "6885faa0b22fe4853849e30f"
+  },
+  "roomId": "68517a9ebe68f6555590b337_6885faa0b22fe4853849e30f",
+  "content": "ssss",
+  "read": false,
+  "createdAt": {
+    "$date": "2025-08-24T15:44:52.655Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-24T15:44:52.655Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ab3561d3eeb089974388bd"
+  },
+  "from": {
+    "$oid": "68517a9ebe68f6555590b337"
+  },
+  "to": {
+    "$oid": "6885faa0b22fe4853849e30f"
+  },
+  "roomId": "68517a9ebe68f6555590b337_6885faa0b22fe4853849e30f",
+  "content": "ad",
+  "read": false,
+  "createdAt": {
+    "$date": "2025-08-24T15:53:05.073Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-24T15:53:05.073Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68b3e09c83b4aeab646413a3"
+  },
+  "from": {
+    "$oid": "68517a9ebe68f6555590b337"
+  },
+  "to": {
+    "$oid": "6862aaae4f028c788aa7051e"
+  },
+  "roomId": "68517a9ebe68f6555590b337_6862aaae4f028c788aa7051e",
+  "content": "d",
+  "read": false,
+  "createdAt": {
+    "$date": "2025-08-31T05:41:48.025Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-31T05:41:48.025Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68b3e15f2baac885cef4771e"
+  },
+  "sender": "Nguyễn Đình Minh Khánh",
+  "from": {
+    "$oid": "68517a9ebe68f6555590b337"
+  },
+  "to": {
+    "$oid": "6862aaae4f028c788aa7051e"
+  },
+  "roomId": "68517a9ebe68f6555590b337_6862aaae4f028c788aa7051e",
+  "content": "sd",
+  "read": false,
+  "createdAt": {
+    "$date": "2025-08-31T05:45:03.132Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-31T05:45:03.132Z"
+  },
+  "__v": 0
+}]

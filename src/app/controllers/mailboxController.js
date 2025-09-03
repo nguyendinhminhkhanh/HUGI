@@ -54,6 +54,7 @@ class mailboxController {
     res.render("mail_compose");
   }
 
+  //[GET] mailbox/chat/:id
   async chat(req, res) {
     const id = req.params.id;
     try {
@@ -69,6 +70,7 @@ class mailboxController {
       return null;
     }
   }
+  //[GET]/mailbox/contact
   async contact(req, res) {
     const person = await Person.find().sort({ createdAt: -1 }).lean();
     res.render("contact", { person });

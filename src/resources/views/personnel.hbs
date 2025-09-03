@@ -111,15 +111,27 @@
                                     <div class="col-sm-6">
                                         <a class="btn btn-primary " href="/manager/personnel/form-add">Thêm nhân sự</a>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <form method="GET" action="/manager/personnel/search" class="col-sm-6">
                                         <div id="editable_filter" class="dataTables_filter">
                                             <label style="display: flex;">
-                                                <div style="text-align: center; margin:0.5rem">Search:</div>
-                                                <input type="search" class="form-control input-sm" placeholder=""
-                                                    aria-controls="editable">
+                                                {{#if search}}
+                                                <input type="search" id="findPersonnelInput"  class="form-control input-sm" name="findPersonnel"
+                                                    value="{{search}}" aria-controls="editable">
+                                                    {{!-- xóa các giá trị tìm kiếm và reload lại trang trả về tất cả dữ liệu --}}
+                                                <button type="button" class="btn btn-danger "
+                                                    onclick="document.getElementById('findPersonnelInput').value=''; this.form.submit();">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                {{else}}
+                                                <input type="search" class="form-control input-sm" name="findPersonnel"
+                                                    placeholder="Tìm kiếm theo tên..." aria-controls="editable">
+                                                {{/if}}
+                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                    Tìm kiếm
+                                                </button>
                                             </label>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover " id="editable">

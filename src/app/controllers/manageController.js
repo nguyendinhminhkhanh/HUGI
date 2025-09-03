@@ -78,13 +78,6 @@ class manageController {
     const data = req.body;
     console.log(id, data);
 
-    //cách viết ngắn gọn của : req.session.existingUser.name = data.name;
-    Object.assign(req.session.existingUser, {
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-    });
-
     Person.findById(id)
       .then((person) => {
         if (!person) {
@@ -95,6 +88,16 @@ class manageController {
           .catch(next);
       })
       .catch(next);
+  }
+
+  async searchPersonnel(req, res, next) {
+    const search = req.query.findPersonnel;
+    console.log(search);
+    const results = await Person.find({
+      name: { $regex: search, $options: "i" },
+    });
+    res.render("personnel", { search, person: mutipleMongooseToObject(results) });
+    // res.json(results)
   }
 }
 
