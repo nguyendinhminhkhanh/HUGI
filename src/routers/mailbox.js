@@ -1,6 +1,5 @@
 const express = require("express");
 const mailboxController = require("../app/controllers/mailboxController");  
-const messageController = require("../app/controllers/messageController");  
 
 const router = express.Router();
 router.get("/", mailboxController.inbox);
