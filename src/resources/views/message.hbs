@@ -51,10 +51,10 @@
                                             <td class="mail-ontact"><a
                                                     href="/mailbox/chat/{{this.partner._id}}">{{this.partner.name}}</a>
                                             </td>
-                                            <td class="mail-subject"><a href="mail_detail.html">{{this.content}}</a>
-                                            </td>
+                                            <td class="mail-subject">{{this.content}}</td>
                                             <td class=""><i class="fa fa-paperclip"></i></td>
                                             <td class="text-right mail-date">{{formatDateTime this.createdAt}}</td>
+                                            <td class="text-right">Xoá</td>
                                         </tr>
                                         {{/each}}
                                         {{!-- <tr class="unread">

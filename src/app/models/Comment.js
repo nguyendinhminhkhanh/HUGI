@@ -14,11 +14,11 @@ const CommentSchema = new mongoose.Schema(
       required: true,
     },
     user_info: {
-      username: { String, required: true },
-      avatar: String,
+      username: { type: String, required: true },
+      avatar: { type: String },
     },
     content: { type: String, required: true },
-    attachments: [
+    media: [
       {
         type: {
           type: String,
@@ -26,7 +26,7 @@ const CommentSchema = new mongoose.Schema(
           default: "image",
         },
         url: { type: String, required: true },
-        alt: String,
+        alt: { type: String },
       },
     ],
     status: {

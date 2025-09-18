@@ -5,12 +5,14 @@ const {
   mongooseToObject,
 } = require("../../util/mongose");
 class manageController {
+
+  //[GET] /manager
   async personnel(req, res) {
     const person = await Person.find().sort({ createdAt: -1 }).lean();
     res.render("personnel", { person });
   }
 
-  //[DELETE] /manager//personnel/:id
+  //[DELETE] /manager/personnel/:id
   async removePersonnel(req, res) {
     //cần phải check tài khảo đang đăng nhặp , có thể xoá nhầm tài khoản đang đăng nhập
     Person.findById(req.params.id)
@@ -90,6 +92,7 @@ class manageController {
       .catch(next);
   }
 
+  //[POST] /manager/personnel/search/:id
   async searchPersonnel(req, res, next) {
     const search = req.query.findPersonnel;
     console.log(search);

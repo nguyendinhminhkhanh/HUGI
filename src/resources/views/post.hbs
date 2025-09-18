@@ -1,0 +1,107 @@
+<div class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Tạo bài viết </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Trang chủ</a>
+                </li>
+                <li class="active">
+                    <strong>Tạo bài viết</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <form id="postForm" role="form" action="/posts/create" method="POST"
+                                enctype="multipart/form-data">
+                                <div class="col-sm-6 b-r">
+                                    <div class="form-group">
+                                        <label>Bạn đang nghĩ gì?</label>
+                                        <textarea name="content" placeholder="Nội dung..."
+                                            class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4>Ảnh / Video</h4>
+                                    <p class="text-center">
+                                        <input type="file" id="fileInput" name="mediaFile" accept="image/*,video/*"
+                                            style="display:none">
+                                        <a href="#" id="chooseFile"><i class="fa fa-sign-in big-icon"></i></a>
+                                    </p>
+                                    <!-- Nơi hiển thị ảnh preview -->
+                                    <div id="preview" style="margin-top:10px; text-align:center"></div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
+                                        <strong>Đăng</strong>
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const fileInput = document.getElementById("fileInput");
+    const chooseFile = document.getElementById("chooseFile");
+    const preview = document.getElementById("preview");
+
+    chooseFile.addEventListener("click", function (e) {
+        e.preventDefault();
+        fileInput.click();
+    });
+
+    fileInput.addEventListener("change", function (event) {
+        preview.innerHTML = ""; // reset preview
+        const file = event.target.files[0];
+        if (file) {
+            const url = URL.createObjectURL(file);
+
+            // Ẩn icon khi có file
+            chooseFile.style.display = "none";
+
+            let mediaElement;
+            if (file.type.startsWith("image/")) {
+                mediaElement = document.createElement("img");
+                mediaElement.src = url;
+                mediaElement.style.maxWidth = "100%";
+                mediaElement.style.maxHeight = "200px";
+            } else if (file.type.startsWith("video/")) {
+                mediaElement = document.createElement("video");
+                mediaElement.src = url;
+                mediaElement.controls = true;
+                mediaElement.style.maxWidth = "100%";
+                mediaElement.style.maxHeight = "200px";
+            }
+
+            preview.appendChild(mediaElement);
+
+            // Tạo nút hủy
+            const cancelBtn = document.createElement("button");
+            cancelBtn.textContent = "Huỷ";
+            cancelBtn.className = "btn btn-danger btn-sm mt-2";
+            cancelBtn.style.display = "block";
+            cancelBtn.style.margin = "10px auto";
+            preview.appendChild(cancelBtn);
+
+            cancelBtn.addEventListener("click", function () {
+                // Xoá preview
+                preview.innerHTML = "";
+                // Reset input file
+                fileInput.value = "";
+                // Hiện lại icon
+                chooseFile.style.display = "inline-block";
+            });
+        }
+    });
+</script>
