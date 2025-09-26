@@ -2,7 +2,7 @@
 <div class="row  border-bottom white-bg dashboard-header">
     <div class="col-sm-9">
         <h2>Xin chào: {{existingUser.name}} !</h2>
-        <small>You have 42 messages and 6 notifications.</small>
+        <small>Bạn đã có {{countPost}} bài viết</small>
 
     </div>
     <div class="col-sm-3">
@@ -20,13 +20,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Bản tin HUGI</h5> <span class="label label-primary">HUGI</span>
-                        </div>
-                        {{!-- foreach --}}
-                        {{#each posts}}
-
-
+                        {{#each myposts}}
                         <div class="col-lg-12" style="background-color: #ffffff;">
                             <div class="social-feed-box">
                                 <div class="pull-right social-action dropdown">

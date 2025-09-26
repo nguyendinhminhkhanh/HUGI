@@ -2,6 +2,7 @@ const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const { mongooseToObject ,mutipleMongooseToObject} = require("../../util/mongose");
 class homeController {
+  //[GET] /
   async dashboard(req, res) {
     const posts = await Post.find().sort({ createdAt: -1 }).lean();
 

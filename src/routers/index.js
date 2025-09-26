@@ -5,6 +5,7 @@ const manager = require("./manage");
 const profile = require("./profile");
 const mailbox = require("./mailbox");
 const post = require("./post");
+const mypost = require("./mypost");
 function router(app) {
   app.use("/profile", profile);
   app.use("/concept", concept);
@@ -12,6 +13,7 @@ function router(app) {
   app.use("/mailbox", mailbox);
   app.use("/auth", auth);
   app.use("/posts", post);
+  app.use("/mypost", mypost);
   app.use("/", home);
 }
 

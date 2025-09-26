@@ -4,6 +4,7 @@ const path = require("path");
 const { mongooseToObject } = require("../../util/mongose");
 const { mutipleMongooseToObject } = require("../../util/mongose");
 class profileController {
+  //[GET] /profile
   async profile(req, res) {
     const userSession = req.session.existingUser;
     console.log(userSession);
@@ -12,6 +13,7 @@ class profileController {
     });
   }
 
+  //[POST] /manager/personnel/update/:id
   async editAvatar(req, res, next) {
     try {
       if (!req.session.existingUser) {
